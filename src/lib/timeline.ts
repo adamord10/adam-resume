@@ -29,7 +29,9 @@ export function formatDuration(start: string, end: string | null, nowYm: string)
 
 // --- Density-weighted axis -------------------------------------------------
 // Each calendar year's width on the axis is proportional to how many entries
-// are active in it, so busy years stretch and quiet years compress.
+// START in it, so busy years stretch. Years where nothing begins (an entry
+// merely passes through, or nothing happens at all) collapse to a sliver and
+// lose their tick label.
 
 export type Scale = {
   minM: number
@@ -39,7 +41,7 @@ export type Scale = {
   cum: number[] // cumulative raw offsets; cum[i] = offset at start of year y0+i
 }
 
-const EMPTY_YEAR_WEIGHT = 0.5
+const PASS_THROUGH_YEAR_WEIGHT = 0.12
 
 export function buildScale(entries: Entry[], nowYm: string): Scale {
   const starts = entries.map((e) => monthIndex(e.start))
@@ -53,10 +55,10 @@ export function buildScale(entries: Entry[], nowYm: string): Scale {
     const yStart = y * 12
     const yEnd = yStart + 11
     let count = 0
-    for (let i = 0; i < entries.length; i++) {
-      if (starts[i] <= yEnd && ends[i] >= yStart) count++
+    for (const s of starts) {
+      if (s >= yStart && s <= yEnd) count++
     }
-    weights.push(Math.max(count, EMPTY_YEAR_WEIGHT))
+    weights.push(Math.max(count, PASS_THROUGH_YEAR_WEIGHT))
   }
   const cum: number[] = [0]
   for (const w of weights) cum.push(cum[cum.length - 1] + w)
@@ -79,7 +81,10 @@ export function scalePos(m: number, s: Scale): number {
 export function scaleTicks(s: Scale): { label: string; left: number }[] {
   const ticks: { label: string; left: number }[] = []
   for (let y = s.y0; y * 12 < s.endM; y++) {
-    if (y * 12 >= s.minM) ticks.push({ label: String(y), left: scalePos(y * 12, s) })
+    // pass-through years keep no label — the axis reads straight across them
+    if (y * 12 >= s.minM && s.weights[y - s.y0] >= 0.5) {
+      ticks.push({ label: String(y), left: scalePos(y * 12, s) })
+    }
   }
   return ticks
 }
@@ -97,8 +102,8 @@ export type TimelineEntryLayout = {
 }
 
 const MIN_BLOCK_W = 0.8
-const BLOCK_ROW_GAP = 0.5
-const CARD_ROW_GAP = 1.5
+const BLOCK_ROW_GAP = 0 // blocks may touch end-to-start on one row
+const CARD_GAP = 1.5
 
 function placeInRow(rowEnds: number[], start: number, end: number, gap: number): number {
   let row = rowEnds.findIndex((e) => e + gap <= start)
@@ -109,6 +114,24 @@ function placeInRow(rowEnds: number[], start: number, end: number, gap: number):
     rowEnds[row] = end
   }
   return row
+}
+
+// Try to fit every card in ONE row by sliding cards sideways away from their
+// desired position (connectors go diagonal instead of cards stacking).
+// Forward pass pushes right on collision; backward pass reclaims overflow.
+// Returns lefts, or null if a single row physically cannot hold them.
+function packSingleRow(desired: number[], cardW: number): number[] | null {
+  const lefts: number[] = []
+  for (const d of desired) {
+    const prevEnd = lefts.length ? lefts[lefts.length - 1] + cardW + CARD_GAP : 0
+    lefts.push(Math.max(Math.min(d, 100 - cardW), prevEnd))
+  }
+  if (lefts[lefts.length - 1] + cardW <= 100) return lefts
+  lefts[lefts.length - 1] = 100 - cardW
+  for (let i = lefts.length - 2; i >= 0; i--) {
+    lefts[i] = Math.min(lefts[i], lefts[i + 1] - cardW - CARD_GAP)
+  }
+  return lefts[0] >= 0 ? lefts : null
 }
 
 export function layoutTimelineLane(
@@ -122,16 +145,36 @@ export function layoutTimelineLane(
     .filter((e) => e.lane === lane)
     .sort((a, b) => monthIndex(a.start) - monthIndex(b.start))
   const blockEnds: number[] = []
-  const cardEnds: number[] = []
-  return laneEntries.map((entry) => {
+
+  const partial = laneEntries.map((entry) => {
     const rawLeft = scalePos(monthIndex(entry.start), s)
     const right = scalePos(monthIndex(entry.end ?? nowYm) + 1, s)
     const blockWidth = Math.max(right - rawLeft, MIN_BLOCK_W)
     const blockLeft = Math.min(rawLeft, 100 - blockWidth)
     const blockRow = placeInRow(blockEnds, blockLeft, blockLeft + blockWidth, BLOCK_ROW_GAP)
     const center = blockLeft + blockWidth / 2
-    const cardLeft = Math.min(Math.max(center - cardW / 2, 0), 100 - cardW)
-    const cardRow = placeInRow(cardEnds, cardLeft, cardLeft + cardW, CARD_ROW_GAP)
-    return { entry, blockLeft, blockWidth, blockRow, center, cardLeft, cardRow }
+    return { entry, blockLeft, blockWidth, blockRow, center }
   })
+
+  const desired = partial.map((p) =>
+    Math.min(Math.max(p.center - cardW / 2, 0), 100 - cardW)
+  )
+  const single = packSingleRow(desired, cardW)
+  if (single) {
+    return partial.map((p, i) => ({ ...p, cardLeft: single[i], cardRow: 0 }))
+  }
+
+  // Fallback: at most two rows — alternate cards between them, then pack each
+  // row sideways independently.
+  const evenIdx = partial.map((_, i) => i).filter((i) => i % 2 === 0)
+  const oddIdx = partial.map((_, i) => i).filter((i) => i % 2 === 1)
+  const lefts: number[] = new Array(partial.length)
+  for (const idx of [evenIdx, oddIdx]) {
+    const packed =
+      packSingleRow(idx.map((i) => desired[i]), cardW) ?? idx.map((i) => desired[i])
+    idx.forEach((i, k) => {
+      lefts[i] = packed[k]
+    })
+  }
+  return partial.map((p, i) => ({ ...p, cardLeft: lefts[i], cardRow: i % 2 }))
 }

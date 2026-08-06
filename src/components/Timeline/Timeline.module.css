@@ -14,21 +14,23 @@
   position: relative;
 }
 
-/* thin line tying an axis block to its info card */
-.connector {
+/* thin lines tying axis blocks to their info cards (may run diagonal) */
+.connLayer {
   position: absolute;
-  width: 1px;
-  background: var(--line);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-  animation: connIn 0.3s ease both;
+  overflow: visible;
 }
 
-.connUp {
-  transform-origin: bottom;
-}
-
-.connDown {
-  transform-origin: top;
+.connLine {
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: connDraw 0.35s ease both;
 }
 
 /* the blocked-off span sitting on the axis */
@@ -150,12 +152,9 @@
   }
 }
 
-@keyframes connIn {
-  from {
-    transform: scaleY(0);
-  }
+@keyframes connDraw {
   to {
-    transform: scaleY(1);
+    stroke-dashoffset: 0;
   }
 }
 
@@ -172,18 +171,25 @@
 
 .drawn .axis,
 .drawn .block,
-.drawn .connector,
 .drawn .card,
 .drawn .tick {
   animation: none;
 }
 
+.drawn .connLine {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .axis,
   .block,
-  .connector,
   .card,
   .tick {
     animation: none;
+  }
+  .connLine {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }

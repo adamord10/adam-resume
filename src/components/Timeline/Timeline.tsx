@@ -68,6 +68,31 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
         role="group"
         aria-label={side === 'above' ? 'work' : 'impact'}
       >
+        <svg
+          className={styles.connLayer}
+          viewBox={`0 0 100 ${height}`}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {lane.map((l, i) => {
+            const cardOffset = blocksH + CONN_GAP + l.cardRow * CARD_ROW_H
+            const cardCx = l.cardLeft + CARD_W / 2
+            const axisY = side === 'above' ? height : 0
+            const cardEdgeY = side === 'above' ? height - cardOffset : cardOffset
+            return (
+              <line
+                key={l.entry.slug}
+                x1={l.center}
+                y1={axisY}
+                x2={cardCx}
+                y2={cardEdgeY}
+                pathLength={1}
+                className={styles.connLine}
+                style={{ animationDelay: `${1.1 + i * 0.12}s` }}
+              />
+            )
+          })}
+        </svg>
         {lane.map((l, i) => {
           const isSelected = selectedSlug === l.entry.slug
           const dates =
@@ -75,18 +100,6 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
           const cardOffset = blocksH + CONN_GAP + l.cardRow * CARD_ROW_H
           return (
             <div key={l.entry.slug}>
-              <span
-                className={`${styles.connector} ${
-                  side === 'above' ? styles.connUp : styles.connDown
-                }`}
-                style={{
-                  left: `${l.center}%`,
-                  height: cardOffset + CARD_H / 2,
-                  animationDelay: `${1.1 + i * 0.12}s`,
-                  ...off(0),
-                }}
-                aria-hidden="true"
-              />
               <span
                 className={`${styles.block} ${isSelected ? styles.blockSelected : ''}`}
                 style={{

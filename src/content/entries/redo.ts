@@ -15,6 +15,13 @@ export const redo: Entry = {
     "Helped launch Redo's UK and EU go-to-market efforts as the company's first sales representative in Europe. Experimented with new sales motions, generated enterprise pipeline, and gained firsthand experience in an AI-native sales organization leveraging agentic workflows to automate prospecting, research, and account operations.",
   ],
   note: "Due to long sales cycles, closed-revenue figures aren't available — I left before the largest deals I sourced would have finished closing.",
+  media: [
+    {
+      src: '/media/redo-accounts.png',
+      alt: 'Largest accounts set at Redo',
+      caption: 'biggest accounts I set',
+    },
+  ],
   sections: [
     {
       heading: 'success stories',
