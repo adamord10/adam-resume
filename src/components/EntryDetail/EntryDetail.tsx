@@ -37,11 +37,15 @@ export default function EntryDetail({ entry }: { entry: Entry }) {
             <div key={p.name} className={styles.project}>
               <strong>{p.name}</strong>
               <p>{p.description}</p>
-              {p.links?.map((l) => (
-                <a key={l.url} href={l.url} target="_blank" rel="noreferrer">
-                  {l.label} ↗
-                </a>
-              ))}
+              {p.links?.length ? (
+                <div className={styles.projectLinks}>
+                  {p.links.map((l) => (
+                    <a key={l.url} href={l.url} target="_blank" rel="noreferrer">
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ))}
         </section>

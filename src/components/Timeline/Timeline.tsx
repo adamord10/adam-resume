@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Entry } from '@/content/types'
 import { formatYm, layoutLane, timelineRange, yearTicks, type LaidOutEntry } from '@/lib/timeline'
 import styles from './Timeline.module.css'
@@ -19,7 +19,16 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
   const work = layoutLane(entries, 'work', range, nowYm)
   const impact = layoutLane(entries, 'impact', range, nowYm)
   const ticks = yearTicks(range)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLElement>(null)
+
+  // Once the draw-in has played, freeze it so display:none/block toggles
+  // (crossing the mobile breakpoint) don't blank and replay the timeline.
+  const [drawn, setDrawn] = useState(false)
+  useEffect(() => {
+    const lastDelayMs = (0.9 + entries.length * 0.12 + 0.45) * 1000
+    const t = setTimeout(() => setDrawn(true), lastDelayMs + 200)
+    return () => clearTimeout(t)
+  }, [entries.length])
 
   const onKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
@@ -50,7 +59,7 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
           ...offset,
         }}
         onClick={() => onSelect(l.entry.slug)}
-        aria-pressed={selectedSlug === l.entry.slug}
+        aria-current={selectedSlug === l.entry.slug ? 'true' : undefined}
       >
         <span className={styles.barOrg}>{l.entry.org}</span>
         <span className={styles.barRole}>{l.entry.summary}</span>
@@ -62,11 +71,11 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
   }
 
   return (
-    <div
+    <nav
       ref={containerRef}
-      className={styles.timeline}
+      className={`${styles.timeline} ${drawn ? styles.drawn : ''}`}
       onKeyDown={onKeyDown}
-      aria-label="Timeline navigation"
+      aria-label="Career timeline"
     >
       <div className={styles.laneLabel} aria-hidden="true">
         work
@@ -98,6 +107,6 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
       <div className={styles.laneLabel} aria-hidden="true">
         impact
       </div>
-    </div>
+    </nav>
   )
 }

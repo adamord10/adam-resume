@@ -25,7 +25,7 @@ export default function TabRows({ entries, selectedSlug, onSelect }: Props) {
             key={e.slug}
             className={`${styles.tab} ${selectedSlug === e.slug ? styles.selected : ''}`}
             onClick={() => onSelect(e.slug)}
-            aria-pressed={selectedSlug === e.slug}
+            aria-current={selectedSlug === e.slug ? 'true' : undefined}
           >
             {e.org}
           </button>

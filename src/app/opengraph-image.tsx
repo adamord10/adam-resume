@@ -3,6 +3,7 @@ import { profile } from '@/content/profile'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
+export const alt = `${profile.name} — interactive timeline resume`
 
 const bars = [
   { top: 290, left: 80, width: 360, accent: true },

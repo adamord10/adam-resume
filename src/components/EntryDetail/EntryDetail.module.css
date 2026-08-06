@@ -71,6 +71,12 @@
   font-size: 0.9rem;
 }
 
+.projectLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;

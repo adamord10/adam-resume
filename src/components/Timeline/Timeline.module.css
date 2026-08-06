@@ -102,6 +102,12 @@
   }
 }
 
+.drawn .bar,
+.drawn .axis,
+.drawn .tick {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .axis,
   .bar,
