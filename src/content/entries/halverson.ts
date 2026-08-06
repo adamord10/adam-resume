@@ -11,6 +11,6 @@ export const halverson: Entry = {
   logo: '/logos/byu.png',
   summary: 'Teaching Assistant',
   story: [
-    'Teaching assistant for a professor of ancient scripture at BYU with a following of over 130,000 on YouTube. Something I got myself into just from visiting his office often and falling in love with the work he does and the impact he has on his students.',
+    'Teaching assistant for a professor of ancient scripture at BYU with a following of over 130,000 on YouTube. A role I earned just by visiting his office often — I fell in love with his work and the impact he has on his students.',
   ],
 }
