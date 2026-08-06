@@ -40,6 +40,35 @@
   font-size: 0.8rem;
 }
 
+.eduDetail {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  max-width: 44rem;
+}
+
+.eduTag {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eduTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.15rem 0;
+}
+
+.eduSchool {
+  font-size: 1.3rem;
+}
+
+.eduDegree {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
 .clearButton {
   border: none;
   background: none;

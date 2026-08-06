@@ -12,6 +12,11 @@ export type Project = {
   media?: Media[]
 }
 
+export type ListSection = {
+  heading?: string
+  items: { title?: string; text?: string }[]
+}
+
 export type Entry = {
   slug: string
   org: string
@@ -21,9 +26,21 @@ export type Entry = {
   lane: Lane
   summary: string // one-liner shown on the timeline bar / mobile tab
   story: string[] // paragraphs
+  employment?: string // e.g. "Full-time"
+  location?: string
+  logo?: string // path under /public; monogram fallback renders if missing
+  note?: string // small disclaimer/context line
+  sections?: ListSection[] // bulleted list blocks (success stories, speakers, …)
   metrics?: Metric[]
   links?: Link[]
   media?: Media[]
   quotes?: Quote[]
   projects?: Project[]
+}
+
+export type Education = {
+  slug: string
+  school: string
+  degree: string
+  logo?: string
 }

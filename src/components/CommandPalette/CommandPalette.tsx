@@ -1,26 +1,21 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import type { Entry } from '@/content/types'
 import styles from './CommandPalette.module.css'
 
+export type PaletteItem = { slug: string; label: string; sub: string }
+
 type Props = {
-  entries: Entry[]
+  items: PaletteItem[]
   onSelect: (slug: string) => void
 }
 
-export default function CommandPalette({ entries, onSelect }: Props) {
+export default function CommandPalette({ items, onSelect }: Props) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const triggerRef = useRef<HTMLElement | null>(null)
-
-  const items = entries.map((e) => ({
-    slug: e.slug,
-    label: e.org,
-    sub: `${e.role} · ${e.lane}`,
-  }))
 
   const filtered = items.filter((i) =>
     `${i.label} ${i.sub}`.toLowerCase().includes(query.toLowerCase())

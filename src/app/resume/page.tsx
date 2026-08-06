@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { education } from '@/content/education'
 import { entries } from '@/content/entries'
 import { profile } from '@/content/profile'
 import type { Lane } from '@/content/types'
@@ -28,7 +29,10 @@ export default function ResumePage() {
               {formatYm(e.start)} – {formatYm(e.end)}
             </span>
           </div>
-          <div className={styles.org}>{e.org}</div>
+          <div className={styles.org}>
+            {e.org}
+            {e.location ? ` · ${e.location}` : ''}
+          </div>
           {e.story.slice(0, 1).map((p, i) => (
             <p key={i} className={styles.blurb}>
               {p}
@@ -53,6 +57,15 @@ export default function ResumePage() {
           {profile.email} · {profile.linkedin} · {profile.siteUrl}
         </p>
       </header>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Education</h2>
+        <div className={styles.item}>
+          <div className={styles.itemHead}>
+            <strong>{education.school}</strong>
+          </div>
+          <div className={styles.org}>{education.degree}</div>
+        </div>
+      </section>
       {section('Experience', 'work')}
       {section('Leadership & Volunteering', 'impact')}
     </main>

@@ -1,15 +1,25 @@
 import type { Entry } from '@/content/types'
-import { formatYm } from '@/lib/timeline'
+import { formatDuration, formatYm } from '@/lib/timeline'
+import Logo from '../Logo/Logo'
 import styles from './EntryDetail.module.css'
 
-export default function EntryDetail({ entry }: { entry: Entry }) {
+export default function EntryDetail({ entry, nowYm }: { entry: Entry; nowYm: string }) {
   return (
     <article className={styles.detail}>
       <header className={styles.header}>
         <span className={styles.laneTag}>{entry.lane}</span>
-        <h2 className={styles.role}>{entry.role}</h2>
+        <div className={styles.titleRow}>
+          <Logo src={entry.logo} name={entry.org} size={30} />
+          <h2 className={styles.role}>{entry.role}</h2>
+        </div>
         <p className={styles.meta}>
-          {entry.org} · {formatYm(entry.start)} – {formatYm(entry.end)}
+          {entry.org}
+          {entry.employment ? ` · ${entry.employment}` : ''}
+        </p>
+        <p className={styles.meta}>
+          {formatYm(entry.start)} – {formatYm(entry.end)} ·{' '}
+          {formatDuration(entry.start, entry.end, nowYm)}
+          {entry.location ? ` · ${entry.location}` : ''}
         </p>
       </header>
 
@@ -18,6 +28,8 @@ export default function EntryDetail({ entry }: { entry: Entry }) {
           {p}
         </p>
       ))}
+
+      {entry.note ? <p className={styles.note}>{entry.note}</p> : null}
 
       {entry.metrics?.length ? (
         <dl className={styles.metrics}>
@@ -29,6 +41,21 @@ export default function EntryDetail({ entry }: { entry: Entry }) {
           ))}
         </dl>
       ) : null}
+
+      {entry.sections?.map((s, si) => (
+        <section key={si} className={styles.section}>
+          {s.heading ? <h3 className={styles.sectionTitle}>{s.heading}</h3> : null}
+          <ul className={styles.sectionList}>
+            {s.items.map((it, ii) => (
+              <li key={ii}>
+                {it.title ? <strong>{it.title}</strong> : null}
+                {it.title && it.text ? ' — ' : ''}
+                {it.text}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
 
       {entry.projects?.length ? (
         <section className={styles.section}>

@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import type { Entry } from '../content/types'
 import {
+  formatDuration,
   formatYm,
   layoutLane,
   monthIndex,
@@ -81,6 +82,15 @@ test('bars near the right edge are clamped inside the timeline', () => {
 test('formatYm renders human dates and present', () => {
   expect(formatYm('2023-06')).toBe('Jun 2023')
   expect(formatYm(null)).toBe('present')
+})
+
+test('formatDuration renders LinkedIn-style month/year spans', () => {
+  expect(formatDuration('2026-06', '2026-08', '2026-08')).toBe('3 mos')
+  expect(formatDuration('2026-04', '2026-05', '2026-08')).toBe('2 mos')
+  expect(formatDuration('2023-01', '2024-12', '2026-08')).toBe('2 yrs')
+  expect(formatDuration('2025-01', '2025-12', '2026-08')).toBe('1 yr')
+  expect(formatDuration('2023-01', null, '2024-03')).toBe('1 yr 3 mos')
+  expect(formatDuration('2026-08', '2026-08', '2026-08')).toBe('1 mo')
 })
 
 test('yearTicks emits one tick per January inside the range', () => {

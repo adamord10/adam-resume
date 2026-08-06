@@ -1,0 +1,18 @@
+.logo {
+  flex: 0 0 auto;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.monogram {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #f4f4f4;
+  color: var(--gray);
+  font-weight: 700;
+  line-height: 1;
+}

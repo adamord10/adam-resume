@@ -15,9 +15,42 @@
   color: var(--accent);
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.15rem 0;
+}
+
 .role {
   font-size: 1.3rem;
-  margin: 0.15rem 0;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: var(--gray);
+  border-left: 3px solid var(--line);
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.sectionList {
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.sectionList li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.45rem;
+}
+
+.sectionList li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.7rem;
 }
 
 .meta {

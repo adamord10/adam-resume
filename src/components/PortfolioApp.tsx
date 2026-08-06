@@ -1,13 +1,23 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { education } from '@/content/education'
 import { entries } from '@/content/entries'
 import { profile } from '@/content/profile'
-import CommandPalette from './CommandPalette/CommandPalette'
+import CommandPalette, { type PaletteItem } from './CommandPalette/CommandPalette'
 import EntryDetail from './EntryDetail/EntryDetail'
+import Logo from './Logo/Logo'
 import TabRows from './TabRows/TabRows'
 import Timeline from './Timeline/Timeline'
 import styles from './PortfolioApp.module.css'
+
+const paletteItems: PaletteItem[] = [
+  ...entries.map((e) => ({ slug: e.slug, label: e.org, sub: `${e.role} · ${e.lane}` })),
+  { slug: education.slug, label: education.school, sub: `${education.degree} · education` },
+]
+
+const isKnownSlug = (slug: string) =>
+  entries.some((e) => e.slug === slug) || slug === education.slug
 
 export default function PortfolioApp({ nowYm }: { nowYm: string }) {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
@@ -15,7 +25,7 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
   useEffect(() => {
     const fromHash = () => {
       const slug = window.location.hash.slice(1)
-      setSelectedSlug(entries.some((e) => e.slug === slug) ? slug : null)
+      setSelectedSlug(isKnownSlug(slug) ? slug : null)
     }
     fromHash()
     window.addEventListener('hashchange', fromHash)
@@ -34,10 +44,11 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
   }
 
   const selected = entries.find((e) => e.slug === selectedSlug) ?? null
+  const eduSelected = selectedSlug === education.slug
 
   return (
     <main className={styles.main}>
-      <CommandPalette entries={entries} onSelect={select} />
+      <CommandPalette items={paletteItems} onSelect={select} />
       <header className={styles.hero}>
         <h1 className={styles.name}>{profile.name}</h1>
         <p className={styles.tagline}>{profile.tagline}</p>
@@ -46,21 +57,38 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
       <div className="desktopOnly">
         <Timeline
           entries={entries}
+          education={education}
           nowYm={nowYm}
           selectedSlug={selectedSlug}
           onSelect={select}
         />
       </div>
       <div className="mobileOnly">
-        <TabRows entries={entries} selectedSlug={selectedSlug} onSelect={select} />
+        <TabRows
+          entries={entries}
+          education={education}
+          selectedSlug={selectedSlug}
+          onSelect={select}
+        />
       </div>
 
-      {selected ? (
+      {selected || eduSelected ? (
         <>
           <button className={styles.clearButton} onClick={deselect}>
             ✕ clear selection
           </button>
-          <EntryDetail entry={selected} />
+          {eduSelected ? (
+            <article className={styles.eduDetail}>
+              <span className={styles.eduTag}>education</span>
+              <div className={styles.eduTitleRow}>
+                <Logo src={education.logo} name={education.school} size={30} />
+                <h2 className={styles.eduSchool}>{education.school}</h2>
+              </div>
+              <p className={styles.eduDegree}>{education.degree}</p>
+            </article>
+          ) : (
+            <EntryDetail entry={selected!} nowYm={nowYm} />
+          )}
         </>
       ) : (
         <section className={styles.about}>

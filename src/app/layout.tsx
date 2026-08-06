@@ -22,6 +22,7 @@ const jsonLd = {
   email: `mailto:${profile.email}`,
   url: profile.siteUrl,
   sameAs: [profile.linkedin, profile.github],
+  alumniOf: 'Brigham Young University',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

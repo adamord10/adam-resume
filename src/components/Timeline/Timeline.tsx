@@ -1,20 +1,22 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { Entry } from '@/content/types'
+import type { Education, Entry } from '@/content/types'
 import { formatYm, layoutLane, timelineRange, yearTicks, type LaidOutEntry } from '@/lib/timeline'
+import Logo from '../Logo/Logo'
 import styles from './Timeline.module.css'
 
 const ROW_H = 44 // px per stacked row inside a lane
 
 type Props = {
   entries: Entry[]
+  education?: Education
   nowYm: string
   selectedSlug: string | null
   onSelect: (slug: string) => void
 }
 
-export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Props) {
+export default function Timeline({ entries, education, nowYm, selectedSlug, onSelect }: Props) {
   const range = timelineRange(entries, nowYm)
   const work = layoutLane(entries, 'work', range, nowYm)
   const impact = layoutLane(entries, 'impact', range, nowYm)
@@ -61,8 +63,11 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
         onClick={() => onSelect(l.entry.slug)}
         aria-current={selectedSlug === l.entry.slug ? 'true' : undefined}
       >
-        <span className={styles.barOrg}>{l.entry.org}</span>
-        <span className={styles.barRole}>{l.entry.summary}</span>
+        <Logo src={l.entry.logo} name={l.entry.org} size={18} />
+        <span className={styles.barText}>
+          <span className={styles.barOrg}>{l.entry.org}</span>
+          <span className={styles.barRole}>{l.entry.summary}</span>
+        </span>
         <span className="srOnly">
           {formatYm(l.entry.start)} – {formatYm(l.entry.end)}
         </span>
@@ -86,6 +91,22 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
         role="group"
         aria-label="work"
       >
+        {education ? (
+          <button
+            className={`${styles.bar} ${styles.eduBar} ${
+              selectedSlug === education.slug ? styles.selected : ''
+            }`}
+            style={{ left: 0, bottom: 0, animationDelay: '0.9s' }}
+            onClick={() => onSelect(education.slug)}
+            aria-current={selectedSlug === education.slug ? 'true' : undefined}
+          >
+            <Logo src={education.logo} name={education.school} size={18} />
+            <span className={styles.barText}>
+              <span className={styles.barOrg}>{education.school}</span>
+              <span className={styles.barRole}>{education.degree}</span>
+            </span>
+          </button>
+        ) : null}
         {work.map((l, i) => renderBar(l, i, 'above'))}
       </div>
       <div className={styles.axisWrap} aria-hidden="true">

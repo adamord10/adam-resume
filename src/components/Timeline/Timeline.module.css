@@ -18,8 +18,9 @@
   position: absolute;
   height: 38px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
   padding: 0 0.5rem;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -30,6 +31,22 @@
   text-align: left;
   cursor: pointer;
   animation: barIn 0.45s ease both;
+}
+
+.barText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.eduBar {
+  width: auto;
+  max-width: 45%;
+  border-style: dashed;
+  border-left-style: solid;
+  padding-right: 0.75rem;
 }
 
 .bar:hover {

@@ -63,6 +63,15 @@ export function formatYm(ym: string | null): string {
   return `${MONTHS[Number(m) - 1]} ${y}`
 }
 
+export function formatDuration(start: string, end: string | null, nowYm: string): string {
+  const months = monthIndex(end ?? nowYm) - monthIndex(start) + 1
+  const yrs = Math.floor(months / 12)
+  const mos = months % 12
+  const y = yrs ? `${yrs} yr${yrs > 1 ? 's' : ''}` : ''
+  const m = mos ? `${mos} mo${mos > 1 ? 's' : ''}` : ''
+  return [y, m].filter(Boolean).join(' ') || '1 mo'
+}
+
 export function yearTicks(range: Range): { label: string; left: number }[] {
   const ticks: { label: string; left: number }[] = []
   for (let y = Math.ceil(range.min / 12); y * 12 <= range.max; y++) {
