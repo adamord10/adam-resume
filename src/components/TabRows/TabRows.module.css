@@ -1,0 +1,38 @@
+.tabRows {
+  padding: 1rem 0;
+}
+
+.row {
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.35rem;
+}
+
+.scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.tab {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.selected {
+  border-color: var(--accent);
+  color: var(--accent);
+}
