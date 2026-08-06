@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Logo.module.css'
 
 type Props = {
@@ -13,10 +13,19 @@ type Props = {
 // real image file exists under /public.
 export default function Logo({ src, name, size = 18 }: Props) {
   const [failed, setFailed] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  // The error event can fire before hydration attaches onError, so also
+  // check the loaded state on mount.
+  useEffect(() => {
+    const img = imgRef.current
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true)
+  }, [src])
 
   if (src && !failed) {
     return (
       <img
+        ref={imgRef}
         src={src}
         alt=""
         width={size}

@@ -71,6 +71,25 @@
   font-size: 0.78rem;
 }
 
+.bullets {
+  list-style: none;
+  margin-top: 0.2rem;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.bullets li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--gray);
+  font-size: 0.7rem;
+}
+
 @media print {
   .printButton {
     display: none;

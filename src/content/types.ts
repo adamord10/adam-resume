@@ -23,6 +23,7 @@ export type Entry = {
   role: string
   start: string // "YYYY-MM"
   end: string | null // null = present
+  dateLabel?: string // display override, e.g. "2020 – 2022" when months are fuzzy
   lane: Lane
   summary: string // one-liner shown on the timeline bar / mobile tab
   story: string[] // paragraphs

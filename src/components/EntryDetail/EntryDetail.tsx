@@ -17,7 +17,7 @@ export default function EntryDetail({ entry, nowYm }: { entry: Entry; nowYm: str
           {entry.employment ? ` · ${entry.employment}` : ''}
         </p>
         <p className={styles.meta}>
-          {formatYm(entry.start)} – {formatYm(entry.end)} ·{' '}
+          {entry.dateLabel ?? `${formatYm(entry.start)} – ${formatYm(entry.end)}`} ·{' '}
           {formatDuration(entry.start, entry.end, nowYm)}
           {entry.location ? ` · ${entry.location}` : ''}
         </p>

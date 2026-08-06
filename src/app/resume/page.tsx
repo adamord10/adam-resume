@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { education } from '@/content/education'
+import { background } from '@/content/background'
 import { entries } from '@/content/entries'
 import { profile } from '@/content/profile'
 import type { Lane } from '@/content/types'
@@ -61,13 +61,27 @@ export default function ResumePage() {
         <h2 className={styles.sectionTitle}>Education</h2>
         <div className={styles.item}>
           <div className={styles.itemHead}>
-            <strong>{education.school}</strong>
+            <strong>{background.education.school}</strong>
+            <span className={styles.dates}>{background.education.location}</span>
           </div>
-          <div className={styles.org}>{education.degree}</div>
+          <div className={styles.org}>{background.education.degree}</div>
+          <ul className={styles.bullets}>
+            {background.education.bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
         </div>
       </section>
       {section('Experience', 'work')}
       {section('Leadership & Volunteering', 'impact')}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Additional</h2>
+        <ul className={styles.bullets}>
+          {background.highlights.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      </section>
     </main>
   )
 }

@@ -8,13 +8,17 @@ test('timeline loads and opens an entry', async ({ page }) => {
   await expect(page).toHaveURL(/#redo/)
 })
 
-test('education chip opens the BYU detail', async ({ page }) => {
+test('default state shows education and background', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('button', { name: /Brigham Young University/ }).first().click()
-  await expect(page.getByRole('heading', { name: 'Brigham Young University' })).toBeVisible()
-  await expect(
-    page.getByRole('article').getByText('Applied and Computational Mathematics')
-  ).toBeVisible()
+  await expect(page.getByText('Applied and Computational Math Emphasis (ACME)')).toBeVisible()
+  await expect(page.getByText('Eagle Scout')).toBeVisible()
+})
+
+test('solo stove card opens its entry', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Solo Stove/ }).first().click()
+  await expect(page.getByRole('heading', { name: 'Associate' })).toBeVisible()
+  await expect(page.getByText('2020 – 2022 · 3 yrs · Grapevine, TX')).toBeVisible()
 })
 
 test('unknown hash falls back to the about state', async ({ page }) => {
@@ -36,16 +40,17 @@ test('back button and clear control restore the about state', async ({ page }) =
 test('command palette jumps to an entry', async ({ page }) => {
   await page.goto('/')
   await page.keyboard.press('Control+k')
-  await page.getByPlaceholder('jump to…').fill('skep')
+  await page.getByPlaceholder('jump to…').fill('halverson')
   await page.keyboard.press('Enter')
-  await expect(page.getByRole('heading', { name: 'Volunteer Associate' })).toBeVisible()
-  await expect(page).toHaveURL(/#skep/)
+  await expect(page.getByRole('heading', { name: 'Teaching Assistant' })).toBeVisible()
+  await expect(page).toHaveURL(/#halverson-ta/)
 })
 
-test('resume page renders with education', async ({ page }) => {
+test('resume page renders with education and additional sections', async ({ page }) => {
   await page.goto('/resume')
   await expect(page.getByRole('heading', { name: 'Adam Ord' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Education' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Experience' })).toBeVisible()
-  await expect(page.getByText('Levinthal Capital')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Additional' })).toBeVisible()
+  await expect(page.getByText('Solo Stove')).toBeVisible()
 })

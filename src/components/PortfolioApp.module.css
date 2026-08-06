@@ -40,33 +40,50 @@
   font-size: 0.8rem;
 }
 
-.eduDetail {
-  border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
-  max-width: 44rem;
+.aboutBlock {
+  margin-bottom: 1.5rem;
 }
 
-.eduTag {
-  font-size: 0.65rem;
+.aboutHeading {
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--gray);
+  margin-bottom: 0.5rem;
 }
 
 .eduTitleRow {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin: 0.15rem 0;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
-.eduSchool {
-  font-size: 1.3rem;
+.eduLocation {
+  color: var(--gray);
 }
 
 .eduDegree {
   color: var(--gray);
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutList {
+  list-style: none;
+}
+
+.aboutList li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.aboutList li::before {
+  content: '▪';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.7rem;
 }
 
 .clearButton {
