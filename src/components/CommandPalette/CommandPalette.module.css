@@ -32,18 +32,13 @@
 }
 
 .item {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
   padding: 0.6rem 0.75rem;
-  background: #fff;
-  border: none;
-  font-family: inherit;
   font-size: 0.8rem;
   cursor: pointer;
-  text-align: left;
 }
 
 .active {

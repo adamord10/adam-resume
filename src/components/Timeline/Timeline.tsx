@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from 'react'
 import type { Entry } from '@/content/types'
-import { layoutLane, timelineRange, yearTicks, type LaidOutEntry } from '@/lib/timeline'
+import { formatYm, layoutLane, timelineRange, yearTicks, type LaidOutEntry } from '@/lib/timeline'
 import styles from './Timeline.module.css'
 
 const ROW_H = 44 // px per stacked row inside a lane
@@ -54,6 +54,9 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
       >
         <span className={styles.barOrg}>{l.entry.org}</span>
         <span className={styles.barRole}>{l.entry.summary}</span>
+        <span className="srOnly">
+          {formatYm(l.entry.start)} – {formatYm(l.entry.end)}
+        </span>
       </button>
     )
   }
@@ -65,11 +68,18 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
       onKeyDown={onKeyDown}
       aria-label="Timeline navigation"
     >
-      <div className={styles.laneLabel}>work</div>
-      <div className={styles.lane} style={{ height: laneHeight(work) }}>
+      <div className={styles.laneLabel} aria-hidden="true">
+        work
+      </div>
+      <div
+        className={styles.lane}
+        style={{ height: laneHeight(work) }}
+        role="group"
+        aria-label="work"
+      >
         {work.map((l, i) => renderBar(l, i, 'above'))}
       </div>
-      <div className={styles.axisWrap}>
+      <div className={styles.axisWrap} aria-hidden="true">
         <div className={styles.axis} />
         {ticks.map((t) => (
           <span key={t.label} className={styles.tick} style={{ left: `${t.left}%` }}>
@@ -77,10 +87,17 @@ export default function Timeline({ entries, nowYm, selectedSlug, onSelect }: Pro
           </span>
         ))}
       </div>
-      <div className={styles.lane} style={{ height: laneHeight(impact) }}>
+      <div
+        className={styles.lane}
+        style={{ height: laneHeight(impact) }}
+        role="group"
+        aria-label="impact"
+      >
         {impact.map((l, i) => renderBar(l, i, 'below'))}
       </div>
-      <div className={styles.laneLabel}>impact</div>
+      <div className={styles.laneLabel} aria-hidden="true">
+        impact
+      </div>
     </div>
   )
 }
