@@ -68,6 +68,16 @@ test('short entries get a minimum clickable width', () => {
   expect(laid.width).toBeGreaterThanOrEqual(3)
 })
 
+test('bars near the right edge are clamped inside the timeline', () => {
+  const old = entry({ slug: 'old', start: '2019-01', end: '2019-06' })
+  const fresh = entry({ slug: 'fresh', start: '2026-08', end: null })
+  const r = timelineRange([old, fresh], '2026-08')
+  const laid = layoutLane([old, fresh], 'work', r, '2026-08')
+  const f = laid.find((l) => l.entry.slug === 'fresh')!
+  expect(f.width).toBeGreaterThanOrEqual(3)
+  expect(f.left + f.width).toBeLessThanOrEqual(100)
+})
+
 test('formatYm renders human dates and present', () => {
   expect(formatYm('2023-06')).toBe('Jun 2023')
   expect(formatYm(null)).toBe('present')

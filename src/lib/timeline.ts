@@ -39,9 +39,11 @@ export function layoutLane(entries: Entry[], lane: Lane, range: Range, nowYm: st
     .sort((a, b) => monthIndex(a.start) - monthIndex(b.start))
   const rowEnds: number[] = [] // rightmost occupied percent per row
   return laneEntries.map((entry) => {
-    const left = positionPercent(entry.start, range)
+    const rawLeft = positionPercent(entry.start, range)
     const right = positionPercent(entry.end ?? nowYm, range)
-    const width = Math.max(right - left, MIN_WIDTH)
+    const width = Math.max(right - rawLeft, MIN_WIDTH)
+    // MIN_WIDTH can push a bar past the axis end; keep it inside the range
+    const left = Math.min(rawLeft, 100 - width)
     let row = rowEnds.findIndex((end) => end + ROW_GAP <= left)
     if (row === -1) {
       row = rowEnds.length
