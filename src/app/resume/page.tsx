@@ -7,7 +7,8 @@ import PrintButton from './PrintButton'
 import styles from './resume.module.css'
 
 export const metadata: Metadata = {
-  title: `Resume — ${profile.name}`,
+  // The root layout's title template appends "— Adam Ord"
+  title: 'Resume',
 }
 
 const byLane = (lane: Lane) =>
