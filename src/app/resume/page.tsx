@@ -54,7 +54,8 @@ export default function ResumePage() {
       <header className={styles.header}>
         <h1 className={styles.name}>{profile.name}</h1>
         <p className={styles.contact}>
-          {profile.email} · {profile.linkedin} · {profile.siteUrl}
+          {profile.location} · {profile.email} · {profile.phone} · {profile.linkedin} ·{' '}
+          {profile.siteUrl}
         </p>
       </header>
       <section className={styles.section}>

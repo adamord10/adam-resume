@@ -23,6 +23,8 @@ const jsonLd = {
   url: profile.siteUrl,
   sameAs: [profile.linkedin, profile.github],
   alumniOf: 'Brigham Young University',
+  telephone: '+1-817-412-9295',
+  address: { '@type': 'PostalAddress', addressLocality: 'Southlake', addressRegion: 'TX' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

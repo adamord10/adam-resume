@@ -13,9 +13,24 @@
   letter-spacing: -0.01em;
 }
 
-.tagline {
+.contactLine {
   color: var(--gray);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.contactLine a {
+  color: var(--gray);
+}
+
+.contactLine a:hover {
+  color: var(--accent);
+}
+
+.tagline {
+  color: var(--ink);
   font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 .about {

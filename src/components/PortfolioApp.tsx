@@ -48,6 +48,10 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
       <CommandPalette items={paletteItems} onSelect={select} />
       <header className={styles.hero}>
         <h1 className={styles.name}>{profile.name}</h1>
+        <p className={styles.contactLine}>
+          {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a> ·{' '}
+          <a href={profile.phoneHref}>{profile.phone}</a>
+        </p>
         <p className={styles.tagline}>{profile.tagline}</p>
       </header>
 
