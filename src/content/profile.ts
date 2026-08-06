@@ -5,7 +5,7 @@ export const profile = {
   location: 'Southlake, TX',
   phone: '(817) 412-9295',
   phoneHref: 'sms:+18174129295',
-  about: ['I believe in the ability each individual has to effect change.'],
+  about: ['I believe deeply in the agency of individuals to effect change in the world'],
   email: 'adam.ord10@gmail.com',
   linkedin: 'https://www.linkedin.com/in/adam-ord-37580b236/',
   github: 'https://github.com/adamord10',

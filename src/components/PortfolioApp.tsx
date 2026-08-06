@@ -76,11 +76,6 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
         </>
       ) : (
         <section className={styles.about}>
-          {profile.about.map((p, i) => (
-            <p key={i} className={styles.aboutIntro}>
-              {p}
-            </p>
-          ))}
           <div className={styles.aboutBlock}>
             <h2 className={styles.aboutHeading}>education</h2>
             <div className={styles.eduTitleRow}>
@@ -92,6 +87,14 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
             <ul className={styles.aboutList}>
               {background.education.bullets.map((b, i) => (
                 <li key={i}>{b}</li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.aboutBlock}>
+            <h2 className={styles.aboutHeading}>about</h2>
+            <ul className={styles.aboutList}>
+              {profile.about.map((p, i) => (
+                <li key={i}>{p}</li>
               ))}
             </ul>
           </div>
