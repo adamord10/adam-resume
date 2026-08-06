@@ -1,0 +1,102 @@
+.detail {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  max-width: 44rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.laneTag {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.role {
+  font-size: 1.3rem;
+  margin: 0.15rem 0;
+}
+
+.meta {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+.story {
+  margin-bottom: 0.85rem;
+  font-size: 0.9rem;
+}
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 1.25rem 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column-reverse; /* value renders above its label */
+}
+
+.metricValue {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.metricLabel {
+  font-size: 0.7rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.section {
+  margin: 1.25rem 0;
+}
+
+.sectionTitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.project {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mediaImg {
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid var(--line);
+}
+
+.caption {
+  font-size: 0.7rem;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+
+.links {
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.quote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
