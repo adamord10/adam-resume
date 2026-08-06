@@ -15,6 +15,17 @@ test('unknown hash falls back to the about state', async ({ page }) => {
   await expect(page.getByText('pick a point on the timeline')).toBeVisible()
 })
 
+test('back button and clear control restore the about state', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Sample Co/ }).first().click()
+  await expect(page).toHaveURL(/#sample-co/)
+  await page.goBack()
+  await expect(page.getByText('pick a point on the timeline')).toBeVisible()
+  await page.getByRole('button', { name: /Acme Startup/ }).first().click()
+  await page.getByRole('button', { name: 'clear selection' }).click()
+  await expect(page.getByText('pick a point on the timeline')).toBeVisible()
+})
+
 test('command palette jumps to an entry', async ({ page }) => {
   await page.goto('/')
   await page.keyboard.press('Control+k')

@@ -40,6 +40,21 @@
   font-size: 0.8rem;
 }
 
+.clearButton {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.72rem;
+  color: var(--gray);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.clearButton:hover {
+  color: var(--ink);
+}
+
 .kbdHint {
   margin-left: auto;
   color: var(--gray);

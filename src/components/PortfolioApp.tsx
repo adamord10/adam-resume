@@ -24,7 +24,13 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
 
   const select = (slug: string) => {
     setSelectedSlug(slug)
-    history.replaceState(null, '', `#${slug}`)
+    // pushState so Back/Forward walk through selections (hashchange syncs state)
+    history.pushState(null, '', `#${slug}`)
+  }
+
+  const deselect = () => {
+    setSelectedSlug(null)
+    history.pushState(null, '', window.location.pathname + window.location.search)
   }
 
   const selected = entries.find((e) => e.slug === selectedSlug) ?? null
@@ -50,7 +56,12 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
       </div>
 
       {selected ? (
-        <EntryDetail entry={selected} />
+        <>
+          <button className={styles.clearButton} onClick={deselect}>
+            ✕ clear selection
+          </button>
+          <EntryDetail entry={selected} />
+        </>
       ) : (
         <section className={styles.about}>
           {profile.about.map((p, i) => (
