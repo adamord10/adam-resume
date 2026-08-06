@@ -50,9 +50,18 @@
   margin-top: 3rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+}
+
+.motto {
+  color: var(--accent);
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.footerLinks {
   display: flex;
   gap: 1.5rem;
-  font-size: 0.8rem;
 }
 
 .aboutBlock {

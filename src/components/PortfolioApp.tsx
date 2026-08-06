@@ -103,15 +103,17 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
       )}
 
       <footer className={styles.footer}>
-        <a href={`mailto:${profile.email}`}>email</a>
-        <a href={profile.linkedin} target="_blank" rel="noreferrer">
-          linkedin
-        </a>
-        <a href={profile.github} target="_blank" rel="noreferrer">
-          github
-        </a>
-        <a href="/resume">resume</a>
-        <span className={`${styles.kbdHint} desktopOnly`}>⌘K jump</span>
+        <p className={styles.motto}>{profile.motto}</p>
+        <div className={styles.footerLinks}>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer">
+            linkedin
+          </a>
+          <a href={profile.github} target="_blank" rel="noreferrer">
+            github
+          </a>
+          <a href="/resume">resume</a>
+          <span className={`${styles.kbdHint} desktopOnly`}>⌘K jump</span>
+        </div>
       </footer>
     </main>
   )

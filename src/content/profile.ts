@@ -1,6 +1,7 @@
 export const profile = {
   name: 'Adam Ord',
-  tagline: 'God opens the way to lasting change. Leadership, not luck.',
+  tagline: 'God opens the way to lasting change.',
+  motto: 'Leadership, not luck.',
   location: 'Southlake, TX',
   phone: '(817) 412-9295',
   phoneHref: 'sms:+18174129295',
