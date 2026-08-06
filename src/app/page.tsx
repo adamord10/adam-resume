@@ -1,3 +1,6 @@
+import PortfolioApp from '@/components/PortfolioApp'
+import { currentYm } from '@/lib/timeline'
+
 export default function Home() {
-  return <main>coming soon</main>
+  return <PortfolioApp nowYm={currentYm()} />
 }

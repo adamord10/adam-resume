@@ -1,0 +1,41 @@
+.main {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 2rem;
+}
+
+.hero {
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.about {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  max-width: 44rem;
+  font-size: 0.9rem;
+}
+
+.hint {
+  margin-top: 1rem;
+  color: var(--gray);
+  font-size: 0.8rem;
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+}
