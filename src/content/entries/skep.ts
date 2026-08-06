@@ -4,7 +4,7 @@ export const skep: Entry = {
   slug: 'skep',
   org: 'Skep Foundation',
   role: 'Volunteer Associate',
-  start: '2025-01',
+  start: '2025-09',
   end: '2025-12',
   lane: 'impact',
   location: 'Economic Empowerment',
