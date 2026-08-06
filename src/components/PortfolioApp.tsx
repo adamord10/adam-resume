@@ -76,6 +76,11 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
         </>
       ) : (
         <section className={styles.about}>
+          {profile.about.map((p, i) => (
+            <p key={i} className={styles.aboutIntro}>
+              {p}
+            </p>
+          ))}
           <div className={styles.aboutBlock}>
             <h2 className={styles.aboutHeading}>education</h2>
             <div className={styles.eduTitleRow}>

@@ -64,6 +64,11 @@
   gap: 1.5rem;
 }
 
+.aboutIntro {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
 .aboutBlock {
   margin-bottom: 1.5rem;
 }

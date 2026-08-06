@@ -10,12 +10,10 @@ export const background = {
     ],
   },
   highlights: [
-    'Fluent in Spanish (reading, writing, and speaking)',
+    'Fluent in Spanish (reading, writing, and speaking); limited working proficiency in Portuguese',
     'Awarded 2nd place in the Spanish category of the Whitmore Global Business Center 2025 Business Language Case Competition',
     'Began at BYU on the pre-finance track, with early internships in private equity and real estate development',
-    'Achieved the rank of Eagle Scout, Boy Scouts of America',
-    'Founder and President of the Art History Club at Southlake Carroll High School',
-    'Heavily influenced by my time competing in basketball, football and wrestling in high school',
-    'Love to play sports, chess, and ski',
+    'Eagle Scout · Founder and President of the Art History Club at Southlake Carroll High School',
+    'Shaped by competing in basketball, football, and wrestling in high school; still love sports, chess, and skiing',
   ],
 }
