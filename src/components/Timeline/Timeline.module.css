@@ -1,0 +1,111 @@
+.timeline {
+  padding: 1.5rem 0 2.5rem;
+}
+
+.laneLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0.5rem 0;
+}
+
+.lane {
+  position: relative;
+}
+
+.bar {
+  position: absolute;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gray);
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.72rem;
+  text-align: left;
+  cursor: pointer;
+  animation: barIn 0.45s ease both;
+}
+
+.bar:hover {
+  border-color: var(--ink);
+}
+
+.bar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.selected {
+  border-left-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.barOrg {
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.barRole {
+  color: var(--gray);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.axisWrap {
+  position: relative;
+  margin: 10px 0 22px;
+}
+
+.axis {
+  height: 2px;
+  background: var(--ink);
+  transform-origin: left;
+  animation: axisIn 0.9s ease both;
+}
+
+.tick {
+  position: absolute;
+  top: 6px;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: var(--gray);
+  animation: barIn 0.45s ease both;
+  animation-delay: 0.7s;
+}
+
+@keyframes axisIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes barIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .axis,
+  .bar,
+  .tick {
+    animation: none;
+  }
+}
