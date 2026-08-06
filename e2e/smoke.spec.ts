@@ -15,6 +15,15 @@ test('unknown hash falls back to the about state', async ({ page }) => {
   await expect(page.getByText('pick a point on the timeline')).toBeVisible()
 })
 
+test('command palette jumps to an entry', async ({ page }) => {
+  await page.goto('/')
+  await page.keyboard.press('Control+k')
+  await page.getByPlaceholder('jump to…').fill('campus')
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('heading', { name: 'Placeholder President' })).toBeVisible()
+  await expect(page).toHaveURL(/#campus-club/)
+})
+
 test('resume page renders', async ({ page }) => {
   await page.goto('/resume')
   await expect(page.getByRole('heading', { name: 'Adam Ord' })).toBeVisible()

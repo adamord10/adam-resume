@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.35);
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  z-index: 50;
+}
+
+.palette {
+  width: min(28rem, 90vw);
+  height: fit-content;
+  background: #fff;
+  border: 1px solid var(--ink);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.list {
+  list-style: none;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem;
+  background: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.active {
+  background: #eef6f1;
+  color: var(--accent);
+}
+
+.itemSub {
+  color: var(--gray);
+  font-size: 0.72rem;
+}
+
+.empty {
+  padding: 0.6rem 0.75rem;
+  color: var(--gray);
+  font-size: 0.8rem;
+}

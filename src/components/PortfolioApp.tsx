@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { entries } from '@/content/entries'
 import { profile } from '@/content/profile'
+import CommandPalette from './CommandPalette/CommandPalette'
 import EntryDetail from './EntryDetail/EntryDetail'
 import TabRows from './TabRows/TabRows'
 import Timeline from './Timeline/Timeline'
@@ -30,6 +31,7 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
 
   return (
     <main className={styles.main}>
+      <CommandPalette entries={entries} onSelect={select} />
       <header className={styles.hero}>
         <h1 className={styles.name}>{profile.name}</h1>
         <p className={styles.tagline}>{profile.tagline}</p>
@@ -67,6 +69,7 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
           github
         </a>
         <a href="/resume">resume</a>
+        <span className={`${styles.kbdHint} desktopOnly`}>⌘K jump</span>
       </footer>
     </main>
   )
