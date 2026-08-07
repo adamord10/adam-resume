@@ -33,7 +33,7 @@ test('back button and clear control restore the about state', async ({ page }) =
   await page.goBack()
   await expect(page.getByText('pick a point on the timeline')).toBeVisible()
   await page.getByRole('button', { name: /NEXU/ }).first().click()
-  await page.getByRole('button', { name: 'clear selection' }).click()
+  await page.getByRole('button', { name: 'return to Education and Background' }).click()
   await expect(page.getByText('pick a point on the timeline')).toBeVisible()
 })
 

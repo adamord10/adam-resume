@@ -70,7 +70,7 @@ export default function PortfolioApp({ nowYm }: { nowYm: string }) {
       {selected ? (
         <>
           <button className={styles.clearButton} onClick={deselect}>
-            ✕ clear selection
+            ← return to Education and Background
           </button>
           <EntryDetail entry={selected} nowYm={nowYm} />
         </>
