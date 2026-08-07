@@ -122,6 +122,10 @@
   border: 1px solid var(--line);
 }
 
+.mediaImgSmall {
+  max-width: 214px;
+}
+
 .caption {
   font-size: 0.7rem;
   color: var(--gray);

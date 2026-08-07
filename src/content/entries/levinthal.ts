@@ -13,6 +13,13 @@ export const levinthal: Entry = {
   story: [
     'Selected as a Levinthal Fellow, gaining firsthand exposure to entrepreneurship, startup formation, fundraising, and venture-backed company building through weekly instruction, founder conversations, and applied startup projects.',
   ],
+  media: [
+    {
+      src: '/media/levinthal1.png',
+      alt: 'Levinthal Fellows during a Bay Area visit',
+      caption: 'fellows in the Bay',
+    },
+  ],
   sections: [
     {
       heading: 'places we visited in the Bay',

@@ -2,7 +2,7 @@ export type Lane = 'work' | 'impact'
 
 export type Link = { label: string; url: string }
 export type Metric = { label: string; value: string }
-export type Media = { src: string; alt: string; caption?: string }
+export type Media = { src: string; alt: string; caption?: string; small?: boolean }
 export type Quote = { text: string; name: string; title: string }
 
 export type Project = {

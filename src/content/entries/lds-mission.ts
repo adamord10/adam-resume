@@ -11,6 +11,11 @@ export const ldsMission: Entry = {
   logo: '/logos/church.png',
   summary: 'Volunteer Representative',
   story: [],
+  media: [
+    { src: '/media/church1.png', alt: 'With friends in Argentina', small: true },
+    { src: '/media/church2.png', alt: 'Holding El Libro de Mormón above Buenos Aires', small: true },
+    { src: '/media/church3.png', alt: 'At the temple in Buenos Aires', small: true },
+  ],
   sections: [
     {
       items: [

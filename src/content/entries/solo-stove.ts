@@ -12,6 +12,13 @@ export const soloStove: Entry = {
   logo: '/logos/solo-stove.png',
   summary: 'Associate',
   story: [],
+  media: [
+    {
+      src: '/media/solostove1.png',
+      alt: 'In the Solo Stove warehouse among stacked boxes',
+      caption: 'warehouse days',
+    },
+  ],
   sections: [
     {
       items: [{ text: 'Worked in a warehouse through high school' }],

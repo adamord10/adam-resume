@@ -84,7 +84,11 @@ export default function EntryDetail({ entry, nowYm }: { entry: Entry; nowYm: str
           <div className={styles.gallery}>
             {entry.media.map((m) => (
               <figure key={m.src}>
-                <img src={m.src} alt={m.alt} className={styles.mediaImg} />
+                <img
+                  src={m.src}
+                  alt={m.alt}
+                  className={m.small ? `${styles.mediaImg} ${styles.mediaImgSmall}` : styles.mediaImg}
+                />
                 {m.caption ? <figcaption className={styles.caption}>{m.caption}</figcaption> : null}
               </figure>
             ))}
