@@ -87,7 +87,13 @@ export default function EntryDetail({ entry, nowYm }: { entry: Entry; nowYm: str
                 <img
                   src={m.src}
                   alt={m.alt}
-                  className={m.small ? `${styles.mediaImg} ${styles.mediaImgSmall}` : styles.mediaImg}
+                  className={[
+                    styles.mediaImg,
+                    m.small ? styles.mediaImgSmall : '',
+                    m.short ? styles.mediaImgShort : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                 />
                 {m.caption ? <figcaption className={styles.caption}>{m.caption}</figcaption> : null}
               </figure>

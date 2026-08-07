@@ -17,6 +17,7 @@ export const soloStove: Entry = {
       src: '/media/solostove1.png',
       alt: 'In the Solo Stove warehouse among stacked boxes',
       caption: 'warehouse days',
+      short: true,
     },
   ],
   sections: [

@@ -126,6 +126,12 @@
   max-width: 214px;
 }
 
+.mediaImgShort {
+  max-height: 460px;
+  width: auto;
+  max-width: 100%;
+}
+
 .caption {
   font-size: 0.7rem;
   color: var(--gray);

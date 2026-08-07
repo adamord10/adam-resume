@@ -20,6 +20,7 @@ export const nexu: Entry = {
       src: '/media/nexu1.jpg',
       alt: 'The NEXU office overlooking Mexico City at dusk',
       caption: 'the office, Mexico City',
+      short: true,
     },
   ],
   metrics: [
